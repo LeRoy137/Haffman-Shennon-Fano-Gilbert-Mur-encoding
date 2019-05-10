@@ -1,0 +1,175 @@
+﻿<Window x:Class="OptimalEncoding.WindowHaffmanAbout"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OptimalEncoding"
+        mc:Ignorable="d"
+        Title="Алгоритм Хаффмана" Height="450" Width="800">
+    <Window.Background>
+        <SolidColorBrush Color="#FF81BD6A"/>
+    </Window.Background>
+    <Window.Resources>
+        <Style TargetType="Expander">
+            <Setter Property="FontWeight" Value="DemiBold"></Setter>
+            <Setter Property="FontSize" Value="16"></Setter>
+        </Style>
+        <Style x:Key="textDescription" >
+            <Setter Property="TextBlock.FontSize" Value="14"></Setter>
+            <Setter Property="TextBlock.TextWrapping" Value="WrapWithOverflow"></Setter>
+            <Setter Property="TextBlock.FontWeight" Value="Normal"></Setter>
+            <Setter Property="TextBlock.TextWrapping" Value="Wrap"></Setter>
+        </Style>
+    </Window.Resources>
+    <Border BorderThickness="2" BorderBrush="#FF37853A" Margin="5">
+        <Grid Background="#FFCBF7C4">
+            <Grid Margin="5">
+                <ScrollViewer VerticalScrollBarVisibility="Visible">
+                    <StackPanel>
+                        <Grid>
+                            <StackPanel>
+                                <TextBlock FontSize="16" FontWeight="DemiBold">Описание:</TextBlock>
+                                <TextBlock Name="txtBlockDescription" TextWrapping="Wrap" Style="{StaticResource textDescription}">
+                                    Алгоритм Хаффмана (англ. Huffman's algorithm) — алгоритм оптимального префиксного кодирования алфавита. Был разработан в 1952 году аспирантом Массачусетского технологического института Дэвидом Хаффманом при написании им курсовой работы. Используется во многих программах сжатия данных, например, PKZIP 2, LZH и др. </TextBlock>
+                            </StackPanel>
+                        </Grid>
+                        <Expander Header="Алгоритм">
+                            <StackPanel>
+                                <TextBlock Style="{StaticResource textDescription}">
+                                    Построение кода Хаффмана сводится к построению соответствующего бинарного дерева по следующему алгоритму:
+                                </TextBlock>
+                                <TextBlock Style="{StaticResource textDescription}">
+                                    1. Составим список кодируемых символов, при этом будем рассматривать один символ как дерево, состоящее из одного элемента c весом, равным частоте появления символа в строке.
+                                </TextBlock>
+                                <TextBlock Style="{StaticResource textDescription}">
+                                    2. Из списка выберем два узла с наименьшим весом.
+                                </TextBlock>
+                                <TextBlock Style="{StaticResource textDescription}">
+                                    3. Сформируем новый узел с весом, равным сумме весов выбранных узлов, и присоединим к нему два выбранных узла в качестве детей.                                </TextBlock>
+                                <TextBlock Style="{StaticResource textDescription}">
+                                    4. Добавим к списку только что сформированный узел вместо двух объединенных узлов.
+                                </TextBlock>
+                                <TextBlock Style="{StaticResource textDescription}">
+                                    5. Если в списке больше одного узла, то повторим пункты со второго по пятый.
+                                </TextBlock>
+                            </StackPanel>
+                        </Expander>
+                        <Expander Header="Пример">
+                            <StackPanel>
+                                <TextBlock Name="txtBlockExample" Style="{StaticResource textDescription}">
+                                Закодируем слово abracadabra. Тогда алфавит будет A={a,b,r,c,d}, а набор весов (частота появления символов алфавита в кодируемом слове) W={5,2,2,1,1}:
+В дереве Хаффмана будет 5 узлов:
+                                </TextBlock>
+                                <DataGrid FontSize="14" FontWeight="Normal" HorizontalAlignment="Center"  AutoGenerateColumns="False" HorizontalGridLinesBrush="DarkGray"
+    RowBackground="LightGray" AlternatingRowBackground="White">
+
+                                    <DataGrid.Items>
+                                        <local:RowExampleHaffman Col1="Вес" Col2="5" Col3="2" Col4="2" Col5="1" Col6="1"/>
+                                    </DataGrid.Items>
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn  Header="Узел" Binding="{Binding Path=Col1}" Width="auto" />
+                                        <DataGridTextColumn  Header="a" Binding="{Binding Path=Col2}" Width="auto" />
+                                        <DataGridTextColumn  Header="b" Binding="{Binding Path=Col3}" Width="auto" />
+                                        <DataGridTextColumn  Header="r" Binding="{Binding Path=Col4}" Width="auto" />
+                                        <DataGridTextColumn  Header="c" Binding="{Binding Path=Col5}" Width="auto" />
+                                        <DataGridTextColumn  Header="d" Binding="{Binding Path=Col6}" Width="auto" />
+                                     </DataGrid.Columns>
+                                </DataGrid>
+                                <TextBlock Style="{StaticResource textDescription}">
+                                   По алгоритму возьмем два символа с наименьшей частотой — это c и d. Сформируем из них новый узел cd весом 2 и добавим его к списку узлов</TextBlock>
+                                <DataGrid FontSize="14" FontWeight="Normal" HorizontalAlignment="Center" AutoGenerateColumns="False" HorizontalGridLinesBrush="DarkGray"
+    RowBackground="LightGray" AlternatingRowBackground="White">
+
+                                    <DataGrid.Items>
+                                        <local:RowExampleHaffman Col1="Вес" Col2="5" Col3="2" Col4="2" Col5="2"/>
+                                    </DataGrid.Items>
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn  Header="Узел" Binding="{Binding Path=Col1}" Width="auto" />
+                                        <DataGridTextColumn  Header="a" Binding="{Binding Path=Col2}" Width="auto" />
+                                        <DataGridTextColumn  Header="b" Binding="{Binding Path=Col3}" Width="auto" />
+                                        <DataGridTextColumn  Header="r" Binding="{Binding Path=Col4}" Width="auto" />
+                                        <DataGridTextColumn  Header="cd" Binding="{Binding Path=Col5}" Width="auto" />
+                                     </DataGrid.Columns>
+                                </DataGrid>
+                                <TextBlock Style="{StaticResource textDescription}">
+                                    Затем опять объединим в один узел два минимальных по весу узла — r и cd:
+                                </TextBlock>
+                                <DataGrid FontSize="14" FontWeight="Normal" HorizontalAlignment="Center" AutoGenerateColumns="False" HorizontalGridLinesBrush="DarkGray"
+    RowBackground="LightGray" AlternatingRowBackground="White">
+
+                                    <DataGrid.Items>
+                                        <local:RowExampleHaffman Col1="Вес" Col2="5" Col3="4" Col4="2"/>
+                                    </DataGrid.Items>
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn  Header="Узел" Binding="{Binding Path=Col1}" Width="auto" />
+                                        <DataGridTextColumn  Header="a" Binding="{Binding Path=Col2}" Width="auto" />
+                                        <DataGridTextColumn  Header="rcd" Binding="{Binding Path=Col3}" Width="auto" />
+                                        <DataGridTextColumn  Header="b" Binding="{Binding Path=Col4}" Width="auto" />
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                                <TextBlock Style="{StaticResource textDescription}">
+                                    Еще раз повторим эту же операцию, но для узлов rcd и b:
+                                </TextBlock>
+                                <DataGrid FontSize="14" FontWeight="Normal" HorizontalAlignment="Center" AutoGenerateColumns="False" HorizontalGridLinesBrush="DarkGray"
+    RowBackground="LightGray" AlternatingRowBackground="White">
+
+                                    <DataGrid.Items>
+                                        <local:RowExampleHaffman Col1="Вес" Col2="6" Col3="5"/>
+                                    </DataGrid.Items>
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn  Header="Узел" Binding="{Binding Path=Col1}" Width="auto" />
+                                        <DataGridTextColumn  Header="brcd" Binding="{Binding Path=Col2}" Width="auto" />
+                                        <DataGridTextColumn  Header="a" Binding="{Binding Path=Col3}" Width="auto" />
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                                <TextBlock Style="{StaticResource textDescription}">
+                                    На последнем шаге объединим два узла — brcd и a:
+                                </TextBlock>
+                                <DataGrid FontSize="14" FontWeight="Normal" HorizontalAlignment="Center" AutoGenerateColumns="False" HorizontalGridLinesBrush="DarkGray"
+    RowBackground="LightGray" AlternatingRowBackground="White">
+
+                                    <DataGrid.Items>
+                                        <local:RowExampleHaffman Col1="Вес" Col2="11"/>
+                                    </DataGrid.Items>
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn  Header="Узел" Binding="{Binding Path=Col1}" Width="auto" />
+                                        <DataGridTextColumn  Header="abrcd" Binding="{Binding Path=Col2}" Width="auto" />
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                                <TextBlock Style="{StaticResource textDescription}">
+                                    Остался один узел, значит, мы пришли к корню дерева Хаффмана (смотри рисунок). Теперь для каждого символа выберем кодовое слово (бинарная последовательность, обозначающая путь по дереву к этому символу от корня):</TextBlock>
+                                <DataGrid FontSize="14" FontWeight="Normal" HorizontalAlignment="Center"  AutoGenerateColumns="False" HorizontalGridLinesBrush="DarkGray"
+    RowBackground="LightGray" AlternatingRowBackground="White">
+
+                                    <DataGrid.Items>
+                                        <local:RowExampleHaffman Col1="Код" Col2="0" Col3="11" Col4="101" Col5="1000" Col6="1001"/>
+                                    </DataGrid.Items>
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn  Header="Символ" Binding="{Binding Path=Col1}" Width="auto" />
+                                        <DataGridTextColumn  Header="a" Binding="{Binding Path=Col2}" Width="auto" />
+                                        <DataGridTextColumn  Header="b" Binding="{Binding Path=Col3}" Width="auto" />
+                                        <DataGridTextColumn  Header="r" Binding="{Binding Path=Col4}" Width="auto" />
+                                        <DataGridTextColumn  Header="c" Binding="{Binding Path=Col5}" Width="auto" />
+                                        <DataGridTextColumn  Header="d" Binding="{Binding Path=Col6}" Width="auto" />
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                                <Viewbox Height="300" Margin="20">
+                                    <Image Margin="10" Source="Resources/Huffman_abracadabra.jpg">
+
+                                    </Image>
+                                </Viewbox>
+
+
+
+
+                            </StackPanel>
+                        </Expander>
+                    </StackPanel>
+                </ScrollViewer>
+                <Button FontWeight="DemiBold" HorizontalAlignment="Right"  VerticalAlignment="Bottom" Margin="5,5,20,10" x:Name="btnOk" Height="50" Width="50" Content="Ok" Click="btnOk_Click" Background="#FF75BB44" BorderBrush="#FF15872A">
+
+                </Button>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>

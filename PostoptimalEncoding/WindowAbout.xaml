@@ -1,0 +1,33 @@
+﻿<Window x:Class="PostoptimalEncoding.WindowAbout"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PostoptimalEncoding"
+        mc:Ignorable="d"
+        Title="О программе" Height="400" Width="350" ResizeMode="NoResize">
+    <Window.Background>
+        <SolidColorBrush Color="#FF9BB4DE">
+        </SolidColorBrush>
+    </Window.Background>
+    <Grid>
+        <Border BorderThickness="2" BorderBrush="#FF531AB6" Margin="5">
+            <Grid Background="#FFE3EBEE">
+                <StackPanel Margin="5" TextBlock.FontSize="14">
+                    <TextBlock FontWeight="DemiBold" FontStyle="Italic">
+                        Описание:
+                    </TextBlock>
+                    <TextBlock TextWrapping="Wrap" Margin="5">
+                    Данная прикладная программа (ПП) предназначена для кодирования алфавита исходного текста энтропийными методами.
+                    </TextBlock>
+                    <TextBlock FontWeight="DemiBold" FontStyle="Italic">
+                        Описание работы ПП:
+                    </TextBlock>
+                    <TextBlock TextWrapping="Wrap" Margin="5">
+                    ПП получает на вход текст в исходном алфавите, подсчитываются частоты симовлов алфавита, затем осуществляется построение эффективных кодов.
+                    </TextBlock>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>
